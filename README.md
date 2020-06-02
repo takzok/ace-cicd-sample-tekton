@@ -1,1 +1,1 @@
-# ace-cicd-tekton-sample
+# ace-cicd-sample-tekton
