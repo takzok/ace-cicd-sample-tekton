@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  generateName: ace-server-ms1-plr-
+spec:
+  serviceAccountName: acems1-pipeline-sa
+  pipelineRef:
+    name: ace-server-ms1-pipeline
+  resources:
+    - name: git-source
+      resourceRef:
+        name: acems1-git
+  params:
+    - name: pathToYamlFile
+      value: "resource/ibmace.yaml"
+    # - name: pathToContext
+    #   value: ./
+    - name: imageUrl
+      value: image-registry.openshift-image-registry.svc:5000/ace/ace-cicd-sample-ms1
+    - name: imageTag
+      value: "latest"
