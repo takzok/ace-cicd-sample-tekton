@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: deploy-ms1-using-kubectl
+  name: deploy-ms1-using-oc
 spec:
   inputs:
     resources:
@@ -30,9 +30,9 @@ spec:
       - "-e"
       - "s;__IMAGE__;$(inputs.params.imageUrl):$(inputs.params.imageTag);g"
       - "/workspace/git-source/$(inputs.params.pathToYamlFile)"
-  - name: run-kubectl
-    image: lachlanevenson/k8s-kubectl
-    command: ["kubectl"]
+  - name: run-oc
+    image: quay.io/openshift/origin-cli:latest
+    command: ["oc"]
     args:
       - "apply"
       - "-f"

@@ -33,7 +33,7 @@ spec:
           resource: git-source
   - name: deploy-to-cluster
     taskRef:
-      name: deploy-ms1-using-kubectl
+      name: deploy-ms1-using-oc
     runAfter:
       - source-to-image
     params:
