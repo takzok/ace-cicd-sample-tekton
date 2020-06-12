@@ -13,8 +13,7 @@ spec:
   params:
     - name: pathToYamlFile
       value: "resource/ibmace.yaml"
-    # - name: pathToContext
-    #   value: ./
+      # value: "resource/ibmace.yaml"
     - name: imageUrl
       value: image-registry.openshift-image-registry.svc:5000/ace/ace-cicd-sample-ms1
     - name: imageTag

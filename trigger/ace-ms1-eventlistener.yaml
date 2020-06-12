@@ -1,0 +1,11 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: ace-ms1-el
+spec:
+  serviceAccountName: acems1-pipeline-sa
+  triggers:
+  - bindings:
+    - name: ace-ms1-tb
+    template:
+      name: ace-ms1-tt

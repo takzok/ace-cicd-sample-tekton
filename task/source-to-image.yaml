@@ -4,19 +4,19 @@ kind: Task
 metadata:
   name: source-to-image
 spec:
-  inputs:
-    resources:
+  resources:
+    inputs:
       - name: git-source
         type: git
-    params:
-      - name: imageUrl
-        description: Url of image repository
-      - name: imageTag
-        description: Tag to apply to the built image
-        default: "latest"  
-      - name: TLSVERIFY
-        description: Do not verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)
-        default: "false"
+  params:
+    - name: imageUrl
+      description: Url of image repository
+    - name: imageTag
+      description: Tag to apply to the built image
+      default: "latest"  
+    - name: TLSVERIFY
+      description: Do not verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)
+      default: "false"
 
   steps:
   - name: build

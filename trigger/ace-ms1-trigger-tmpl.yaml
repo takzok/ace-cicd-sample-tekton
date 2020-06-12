@@ -1,0 +1,48 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: ace-ms1-tt
+spec:
+  params:
+  - name: git-repo-url
+    description: The git repository url
+  - name: git-revision
+    description: The git revision
+    default: master
+  - name: git-repo-name
+    description: The name of the deployment to be created / patched
+
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1alpha1
+    kind: PipelineResource
+    metadata:
+      name: acems1-git-trigger-$(uid)
+    spec:
+      type: git
+      params:
+      - name: revision
+        value: $(params.git-revision)
+      - name: url
+        value: $(params.git-repo-url)
+
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      name: ace-server-ms1-pipeline-run-$(uid)
+    spec:
+      serviceAccountName: acems1-pipeline-sa
+      pipelineRef:
+        name: ace-server-ms1-pipeline
+      resources:
+      - name: git-source
+        resourceRef:
+          name: acems1-git-trigger-$(uid)
+      params:
+      - name: pathToYamlFile
+        value: "resource/ibmace.yaml"
+      - name: manifestDir
+        value: "resource"
+      - name: imageUrl
+        value: image-registry.openshift-image-registry.svc:5000/ace/ace-cicd-sample-ms1
+      - name: imageTag
+        value: "latest"
