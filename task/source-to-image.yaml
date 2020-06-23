@@ -31,7 +31,7 @@ spec:
 
   - name: push
     image: quay.io/buildah/stable:v1.11.0
-    workingDir: /workspace/source
+    workingDir: /workspace/git-source
     command: ['buildah', 'push', '--tls-verify=$(inputs.params.TLSVERIFY)', '$(inputs.params.imageUrl):$(inputs.params.imageTag)','image-registry.openshift-image-registry.svc:5000/ace/ace-cicd-sample-ms1:latest']
     volumeMounts:
     - name: varlibcontainers

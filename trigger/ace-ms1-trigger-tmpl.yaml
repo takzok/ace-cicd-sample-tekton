@@ -45,4 +45,4 @@ spec:
       - name: imageUrl
         value: image-registry.openshift-image-registry.svc:5000/ace/ace-cicd-sample-ms1
       - name: imageTag
-        value: "latest"
+        value: $(params.git-revision)
