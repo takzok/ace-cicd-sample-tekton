@@ -5,8 +5,6 @@ metadata:
 spec:
   params:
   - name: git-repo-url
-    value: $(body.repository.html_url)
-  - name: git-repo-name
-    value: $(body.repository.name)
+    value: "https://github.com/$(body.repository.full_name).git"
   - name: git-revision
     value: $(body.head_commit.id)
